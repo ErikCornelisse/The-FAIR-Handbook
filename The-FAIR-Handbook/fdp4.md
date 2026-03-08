@@ -9,7 +9,7 @@ The request for data is typically made in terms of metadata, and that request sh
 The relationship between metadata and data interfaces from the technical side is presented in the Figure below. 
 
 <p align = "center">
-<img src=".\_static\img\datainterface.png" height="422" />
+<img src="./_static/img/datainterface.png" height="422" />
 </br>
 <small>TNO, EFRO.</small>
 </p>

@@ -25,7 +25,7 @@ With metadata you can:
 - Trace resources. 
 
 <p align = "center">
-<img src=".\_static\img\metadataformats.png" height="359" />
+<img src="./_static/img/metadataformats.png" height="359" />
 </br>
 <small>TNO, EFRO.</small>
 </p>

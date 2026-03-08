@@ -5,7 +5,7 @@
 **Copy and Download** is the most simple data sharing approach where the data controller shares copies of data directly with other parties, the data recipients. This approach is the easy to implement and is still being used the most, but comes with a number of drawbacks.
 
 <p align = "center">
-<img src=".\_static\img\datastrategy1.png" height="464" />
+<img src="./_static/img/datastrategy1.png" height="464" />
 </br>
 <small>TNO, EFRO</small>
 </p>

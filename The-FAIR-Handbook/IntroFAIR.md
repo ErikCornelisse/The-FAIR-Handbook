@@ -18,7 +18,7 @@ These principles cover four principal categories:
 
 
 <p align = "center">
-<img src=".\_static\img\fairbig.png" height="300" />
+<img src="./_static/img/fairbig.png" height="300" />
 </br>
 <small>SciBite, Elsevier.</small>
 </p>
