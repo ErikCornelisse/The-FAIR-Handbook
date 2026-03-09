@@ -130,3 +130,6 @@ dmypy.json
 
 # MyST build outputs
 _build
+
+# macOS
+.DS_Store
