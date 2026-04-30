@@ -133,3 +133,6 @@ _build
 
 # macOS
 .DS_Store
+
+# Local raw notes / analysis
+raw/
