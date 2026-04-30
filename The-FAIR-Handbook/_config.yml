@@ -7,7 +7,7 @@
 # Book settings
 title                       : Playbook for Health Data Sharing Ecosystems  # The title of the book. Will be placed in the left navbar.
 author                      : TNO  # The author of the book
-copyright                   : "2022"  # Copyright year to be placed in the footer
+copyright                   : "2026"  # Copyright year to be placed in the footer
 logo                        : logo.png  # A path to the book logo
 
 # Force re-execution of notebooks on each build.
