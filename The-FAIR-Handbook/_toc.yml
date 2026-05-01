@@ -4,13 +4,16 @@
 format: jb-book
 root: intro1
 parts:
-  - caption: Data Sharing Approaches
+  - caption: "Phase 1: Explore — Value, Stakeholders & Use Cases"
     chapters:
+    - file: phasedjourney
     - file: dss1
+    - file: roles
+    - file: journey
     - file: dss2
     - file: dss3
     - file: dss4
-  - caption: FAIR Data Exchange
+  - caption: "Phase 2: Govern — FAIR Principles & Data Governance"
     chapters:
     - file: IntroFAIR
     - file: findable
@@ -34,25 +37,7 @@ parts:
     - file: fdp1
       sections:
         - file: fdp2
-    - file: fdp3
-      sections:
-        - file: fdp4
-        - file: fdp5
-    - file: dia1
-      sections:
-        - file: dia2
-        - file: dia3
-        - file: dia4
-        - file: dia5
-  - caption: Privacy-Enhancing Technologies (PET) 
-    chapters:
-    - file: z3
-    - file: pet1
-    - file: pet2
-    - file: pet3
-    - file: pet4
-    - file: pet5
-  - caption: Legislation
+  - caption: "Phase 3: Contract — Legal Frameworks & Agreements"
     chapters:
     - file: IntroLegal
     - file: legal1
@@ -63,3 +48,29 @@ parts:
     - file: legal6
     - file: legal7
     - file: legal8
+    - file: ehds
+    - file: dsa
+  - caption: "Phase 4: Integration — Technical Architecture & Privacy"
+    chapters:
+    - file: fdp3
+      sections:
+        - file: fdp4
+        - file: fdp5
+    - file: z3
+    - file: pet1
+    - file: pet2
+    - file: pet3
+    - file: pet4
+    - file: pet5
+    - file: dia1
+      sections:
+        - file: dia2
+        - file: dia3
+        - file: dia4
+        - file: dia5
+  - caption: "Phase 5: Operation — Lifecycle & Sustainability"
+    chapters:
+    - file: op1
+    - file: op2
+    - file: op3
+    - file: op4
