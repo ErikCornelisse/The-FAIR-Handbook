@@ -21,3 +21,4 @@ site:
   options:
     logo: logo.png
     logo_text: Playbook for Health Data Sharing Ecosystems
+    style: custom.css
