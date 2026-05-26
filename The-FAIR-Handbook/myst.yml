@@ -1,0 +1,23 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 4f586d3c-b39e-497d-8c74-3ec49bc75637
+  title: Playbook for Health Data Sharing Ecosystems
+  authors:
+    - name: TNO
+  copyright: "2026"
+  github: https://github.com/dualslash/The-FAIR-Handbook
+  # _toc.yml in this directory (jb-book format) is auto-discovered by MyST v2.
+site:
+  template: book-theme
+  title: Playbook for Health Data Sharing Ecosystems
+  actions:
+    - title: Repository
+      url: https://github.com/dualslash/The-FAIR-Handbook
+      static: true
+    - title: Issues
+      url: https://github.com/dualslash/The-FAIR-Handbook/issues
+      static: true
+  options:
+    logo: logo.png
+    logo_text: Playbook for Health Data Sharing Ecosystems

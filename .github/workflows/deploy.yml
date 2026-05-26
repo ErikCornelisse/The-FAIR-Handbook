@@ -23,15 +23,16 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build static HTML
+        working-directory: The-FAIR-Handbook
         run: jupyter-book build --html
 
       - name: Copy netlify.toml into build output
-        run: cp netlify.toml _build/html/netlify.toml
+        run: cp netlify.toml The-FAIR-Handbook/_build/html/netlify.toml
 
       - name: Deploy to gh-pages
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
-          ghp-import -n -p -f _build/html
+          ghp-import -n -p -f The-FAIR-Handbook/_build/html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
