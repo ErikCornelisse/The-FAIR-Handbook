@@ -24,3 +24,55 @@ article a {
 article a:hover {
   text-decoration: underline;
 }
+
+/* --- Search bar at top of sidebar (all viewports) -------------------
+   Visually position the header's search button at the top-left of the
+   viewport (where the sidebar sits on wide screens). CSS-only via
+   position:fixed — the bar stays anchored there and does not scroll
+   with the TOC; a fork would be required for true scroll integration.
+   Click still opens the Radix search modal.
+
+   .myst-top-nav uses backdrop-blur, which makes it a containing block
+   for position:fixed descendants — we override backdrop-filter so the
+   search bar can escape to viewport coordinates. The header keeps its
+   colored background; only the blur effect is dropped.                */
+.myst-top-nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.myst-search-bar {
+  position: fixed !important;
+  top: 4.5rem;                /* just below the 60px header band */
+  left: 1.5rem;
+  width: 16.5rem !important;  /* sidebar column width minus side padding */
+  aspect-ratio: auto !important; /* override Tailwind aspect-square */
+  z-index: 6;
+}
+
+/* Reserve vertical space so the TOC starts below the fixed search bar */
+.myst-primary-sidebar-toc {
+  padding-top: 4rem;
+}
+
+/* --- Sidebar TOC font size ------------------------------------------
+   Match the on-page outline (.myst-outline-section uses
+   text-sm leading-6 = 0.875rem / 1.5rem line-height). Applied on the
+   TOC container so all descendant items inherit.                       */
+.myst-primary-sidebar-toc,
+.myst-primary-sidebar-toc * {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+/* --- Sidebar content alignment ---------------------------------------
+   book-theme places the sidebar pointer at `col-margin-left`, which on
+   wide screens resolves to `grid-column: page/body-start` — that's the
+   SECOND grid line in (after `screen-start`). The content therefore sits
+   inset by the grid's left padding. Force the pointer to span from the
+   first grid line so the sidebar content starts at the viewport edge.  */
+@media (min-width: 1280px) {
+  .myst-primary-sidebar-pointer {
+    grid-column: screen-start / body-start !important;
+    justify-self: start !important;
+  }
+}

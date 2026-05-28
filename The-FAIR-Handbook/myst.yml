@@ -11,13 +11,6 @@ project:
 site:
   template: book-theme
   title: Playbook for Health Data Sharing Ecosystems
-  actions:
-    - title: Repository
-      url: https://github.com/dualslash/The-FAIR-Handbook
-      static: true
-    - title: Issues
-      url: https://github.com/dualslash/The-FAIR-Handbook/issues
-      static: true
   options:
     logo: logo.png
     logo_text: Playbook for Health Data Sharing Ecosystems
