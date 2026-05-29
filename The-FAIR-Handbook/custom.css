@@ -51,6 +51,17 @@ article a:hover {
    (its pointer is `hidden xl:flex`). So the menu button and the sidebar
    toggle in lockstep — no override needed. */
 
+/* Logo flush-left on wide screens. At xl the hamburger is gone (display:none,
+   reserves no space), but the logo keeps its `xl:ml-7` (28px) left margin,
+   leaving it inset from the header band's left padding. That margin lines up
+   with nothing (sidebar TOC sits at ~4px, prose at ~308px), so drop it at xl+
+   to seat the logo at the header's content edge. */
+@media (min-width: 1280px) {
+  .myst-home-link {
+    margin-left: 0 !important;
+  }
+}
+
 /* --- Narrow-screen header tidy (Option D) ---------------------------
    The search + theme buttons are position:fixed (out of flow), so the
    header flexbox reserves no space for them. On narrow screens the long
