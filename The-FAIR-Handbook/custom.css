@@ -199,3 +199,28 @@ article a:hover {
     justify-self: start !important;
   }
 }
+
+/* --- Narrower sidebar (reduce visual distraction) -------------------
+   book-theme caps the sidebar content at max-w-[350px], which makes the
+   left nav a wide, dominant column. Trim it to ~14rem so it reads as a
+   slim column closer to the right Contents outline's width. The pointer
+   is left-justified (above), so the content stays anchored left and the
+   freed space becomes margin between the sidebar and the prose.
+   Trade-off: long TOC entries wrap over more lines.                    */
+.myst-primary-sidebar-toc,
+.myst-primary-sidebar-footer,
+.myst-primary-sidebar-topnav {
+  max-width: 18rem !important;   /* 288px */
+}
+
+/* --- Shift the on-page "Contents" outline rightward ------------------
+   The outline wrapper sits in col-margin-right with lg:ml-10 (2.5rem).
+   Increase that left margin so the outline moves further right within
+   its band, away from the prose. Scoped to lg+ where the outline is
+   placed in the margin. Tune the value to taste; pushing too far makes
+   the outline narrower and wraps its entries.                          */
+@media (min-width: 1024px) {
+  .lg\:col-margin-right {
+    margin-left: 6rem !important;
+  }
+}
