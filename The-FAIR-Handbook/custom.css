@@ -46,10 +46,10 @@ article a:hover {
    semantics don't shift their visible position. backdrop-filter
    override is dropped accordingly.                                    */
 
-/* Hamburger always visible — override the `xl:hidden` on its wrapper. */
-.myst-top-nav-bar div:has(> .myst-top-nav-menu-button) {
-  display: block !important;
-}
+/* Hamburger follows the theme default (`block xl:hidden`): shown below
+   the xl breakpoint (1280px), hidden at xl+ where the TOC sidebar appears
+   (its pointer is `hidden xl:flex`). So the menu button and the sidebar
+   toggle in lockstep — no override needed. */
 
 /* --- Narrow-screen header tidy (Option D) ---------------------------
    The search + theme buttons are position:fixed (out of flow), so the
