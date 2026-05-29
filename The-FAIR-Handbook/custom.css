@@ -51,14 +51,16 @@ article a:hover {
    (its pointer is `hidden xl:flex`). So the menu button and the sidebar
    toggle in lockstep — no override needed. */
 
-/* Logo flush-left on wide screens. At xl the hamburger is gone (display:none,
-   reserves no space), but the logo keeps its `xl:ml-7` (28px) left margin,
-   leaving it inset from the header band's left padding. That margin lines up
-   with nothing (sidebar TOC sits at ~4px, prose at ~308px), so drop it at xl+
-   to seat the logo at the header's content edge. */
+/* Logo aligned with the TOC on wide screens. At xl the hamburger is gone
+   (display:none, reserves no space) and the logo otherwise sits at the header
+   band's left padding (md:px-8 = 32px), while the TOC sidebar broke out to the
+   viewport edge (text ≈12px). Pull the logo left by 1.5rem so its image lines
+   up with the TOC text. Note: the header bar is max-w-[1440px] mx-auto, so this
+   aligns at viewports up to ~1440px; beyond that the centered header drifts the
+   logo rightward while the TOC stays pinned left. */
 @media (min-width: 1280px) {
   .myst-home-link {
-    margin-left: 0 !important;
+    margin-left: -1.5rem !important;
   }
 }
 
