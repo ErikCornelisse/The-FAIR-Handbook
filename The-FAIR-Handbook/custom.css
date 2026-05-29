@@ -127,6 +127,21 @@ article a:hover {
   background-color: transparent !important;
 }
 
+/* --- Sidebar footer (version string) --------------------------------
+   The primary_sidebar_footer part (set in myst.yml) replaces the
+   default centered "Made with MyST" badge. Left-align its content.
+
+   The footer container shares the TOC container's wrapper classes
+   (ml-3 xl:ml-0 mr-3), so their left edges already align at every
+   width. The TOC text is then inset a breakpoint-independent ~0.75rem
+   (.myst-toc px-1 + item pl-2). Apply one matching inset at ALL widths
+   so the version stays aligned with the TOC entries on both small and
+   wide screens — a single constant, not a per-breakpoint value.       */
+.myst-primary-sidebar-footer {
+  text-align: left !important;
+  padding-left: 0.5rem !important;
+}
+
 /* --- Search dialog reshaped as a right-anchored side panel ---------
    book-theme renders the search results in a Radix Dialog with class
    .myst-search-dialog, centered on sm+ (sm:left-1/2 sm:-translate-x-1/2

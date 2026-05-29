@@ -11,6 +11,10 @@ project:
 site:
   template: book-theme
   title: Playbook for Health Data Sharing Ecosystems
+  parts:
+    # Replaces the default "Made with MyST" footer at the bottom of the
+    # left sidebar. Bump the version string in this file each release.
+    primary_sidebar_footer: _site/primary_sidebar_footer.md
   options:
     logo: logo.png
     logo_text: Playbook for Health Data Sharing Ecosystems
