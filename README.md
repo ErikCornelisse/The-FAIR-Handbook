@@ -2,7 +2,7 @@
 
 A complete knowledge base for health data sharing ecosystems using FAIR data and services.
 
-[Available here](https://dualslash.github.io/The-FAIR-Handbook/), automatically built from this source using [Github workflow](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions).
+[Available here](https://erikcornelisse.github.io/The-FAIR-Handbook/), automatically built from this source using [Github workflow](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions).
 
 ## Development Instructions
 
