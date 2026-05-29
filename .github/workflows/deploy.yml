@@ -25,6 +25,11 @@ jobs:
       - name: Build static HTML
         working-directory: The-FAIR-Handbook
         run: jupyter-book build --html
+        env:
+          # GitHub Pages serves this project site under the /The-FAIR-Handbook
+          # subpath, so MyST must root all asset URLs there. Without this the
+          # SPA's /build/... assets 404 and it shows the BASE_URL warning.
+          BASE_URL: /The-FAIR-Handbook
 
       - name: Copy netlify.toml into build output
         run: cp netlify.toml The-FAIR-Handbook/_build/html/netlify.toml
