@@ -11,6 +11,12 @@ set -euo pipefail
 
 cd "$(dirname "$0")/The-FAIR-Handbook"
 
+# `jupyter-book build` spawns a Node SSR server (node ./server.js, on port 3000
+# or the next free port) to prerender the static HTML, and leaves it running
+# when it finishes. Snapshot the existing ones so we can kill only the server
+# this build spawns — without touching an unrelated `jupyter-book start`.
+servers_before=$(pgrep -f "node ./server.js" || true)
+
 jupyter-book build --html
 
 # Use python3 if present, else python (CI's setup-python provides `python`).
@@ -58,5 +64,12 @@ for page in html.rglob("index.html"):
         n += 1
 print(f"Inlined search-subsection-label.js into {n} page(s).")
 PY
+
+# Kill the prerender server jupyter-book leaked (only the one this build spawned;
+# the static output is already written, so it is safe to stop now).
+servers_after=$(pgrep -f "node ./server.js" || true)
+for pid in $servers_after; do
+  echo "$servers_before" | grep -qx "$pid" || kill "$pid" 2>/dev/null || true
+done
 
 echo "Build complete: The-FAIR-Handbook/_build/html"
