@@ -13,9 +13,42 @@ If you'd like to develop and/or build the The FAIR Handbook book, you should:
 1. Clone this repository
 2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
 3. (Optional) Edit the books source files located in the `The-FAIR-Handbook/` directory (markdown, jupyter notebooks and tex supported)
-4. Run `jupyter-book build The-FAIR-Handbook/` to compile
+4. Run `./build.sh` to compile
 
 A fully-rendered HTML version of the book will be built in `The-FAIR-Handbook/_build/html/`.
+
+#### `build.sh` — always build with this
+
+`build.sh` wraps `jupyter-book build` and applies post-build fixups that the
+deployed site depends on. **Use it instead of a bare `jupyter-book build`**, and
+note that `jupyter-book start` (the live dev server) does **not** run these
+fixups — so search/anchor behaviour there will not match production. To preview
+the real behaviour locally, run `./build.sh` and serve the output, e.g.:
+
+```bash
+./build.sh
+python3 -m http.server -d The-FAIR-Handbook/_build/html 8000
+# then open http://localhost:8000/
+```
+
+To mimic the GitHub Pages subpath locally, build with the same `BASE_URL` CI uses
+and serve it under that path:
+
+```bash
+BASE_URL=/The-FAIR-Handbook ./build.sh
+```
+
+What `build.sh` does on top of `jupyter-book build`:
+
+- **Index-page search links** — MyST records the index page under its slug (e.g.
+  `/intro1`), but it is served at the site root, so those search hits would 404.
+  The script rewrites them to `/`.
+- **Subsection search labels** — inlines `The-FAIR-Handbook/search-subsection-label.js`
+  into each page so search results are labelled with the subsection they belong
+  to instead of the page title (the link target is unchanged).
+
+The same script runs in CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)),
+so local builds and the deployed site stay identical.
 
 ### Hosting the book
 
