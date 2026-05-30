@@ -23,13 +23,16 @@ A fully-rendered HTML version of the book will be built in `The-FAIR-Handbook/_b
 deployed site depends on. **Use it instead of a bare `jupyter-book build`**, and
 note that `jupyter-book start` (the live dev server) does **not** run these
 fixups — so search/anchor behaviour there will not match production. To preview
-the real behaviour locally, run `./build.sh` and serve the output, e.g.:
+the real behaviour locally, build and serve the static output. The `./serve.sh`
+helper does both in one command:
 
 ```bash
-./build.sh
-python3 -m http.server -d The-FAIR-Handbook/_build/html 8000
-# then open http://localhost:8000/
+./serve.sh           # build + serve on http://localhost:8000
+./serve.sh 9000      # use a different port
 ```
+
+(Equivalent to running `./build.sh` then
+`python3 -m http.server -d The-FAIR-Handbook/_build/html 8000`.)
 
 To mimic the GitHub Pages subpath locally, build with the same `BASE_URL` CI uses
 and serve it under that path:
