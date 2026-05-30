@@ -37,4 +37,26 @@ p.write_text(json.dumps(data))
 print(f"Rewrote {n} index-slug ('{index_slug}') search URLs to root.")
 PY
 
+# Relabel search results with their subsection instead of the page title.
+# Inline the script into every page's <head> as a synchronous (non-deferred)
+# tag. The SPA's hydration reconciles the whole document and strips foreign
+# <script> nodes (both in <body> and <head>), but a synchronous head script
+# *executes during parse*, before hydration runs — so its MutationObserver is
+# installed and keeps working even after the node itself is removed.
+BASE_URL="${BASE_URL:-}" "$PYTHON" - <<'PY'
+import pathlib
+js = pathlib.Path("search-subsection-label.js").read_text()
+tag = "<script>\n" + js + "\n</script>"
+html = pathlib.Path("_build/html")
+n = 0
+for page in html.rglob("index.html"):
+    text = page.read_text()
+    if "search-subsection-label" in text:
+        continue
+    if "</head>" in text:
+        page.write_text(text.replace("</head>", tag + "</head>", 1))
+        n += 1
+print(f"Inlined search-subsection-label.js into {n} page(s).")
+PY
+
 echo "Build complete: The-FAIR-Handbook/_build/html"
