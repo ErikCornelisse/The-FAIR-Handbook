@@ -2,13 +2,13 @@
 # Start the MyST live dev server for the fast edit/preview loop.
 #
 # Usage:
-#   ./start.sh                 # serve on the default port (3000)
-#   ./start.sh --port 4000     # any jupyter-book start flags are passed through
+#   ./start_dev.sh             # serve on the default port (3000)
+#   ./start_dev.sh --port 4000 # any jupyter-book start flags are passed through
 #
 # NOTE: this is the *dev server*. It does NOT apply build.sh's fixups
 # (search-subsection labels, index-page anchor fix, BASE_URL), so search/anchor
 # behaviour will differ from production. To preview the real deployed behaviour,
-# use ./build.sh and serve _build/html instead. See README.
+# use ./serve.sh (or ./build.sh and serve _build/html). See README.
 set -euo pipefail
 
 cd "$(dirname "$0")/The-FAIR-Handbook"

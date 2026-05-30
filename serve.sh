@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build the site with the production fixups and serve it locally — a single
 # command to preview exactly what gets deployed (search/anchor behaviour
-# included). Unlike ./start.sh (the live dev server), this serves the static
+# included). Unlike ./start_dev.sh (the live dev server), this serves the static
 # _build/html that ./build.sh produces.
 #
 # Usage:

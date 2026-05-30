@@ -53,21 +53,32 @@ What `build.sh` does on top of `jupyter-book build`:
 The same script runs in CI ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)),
 so local builds and the deployed site stay identical.
 
-#### `start.sh` — fast dev loop
+#### `start_dev.sh` — fast dev loop
 
 For quick iteration while editing content, use the live dev server with
 auto-reload:
 
 ```bash
-./start.sh                 # serves on http://localhost:3000
-./start.sh --port 4000     # extra flags pass through to jupyter-book start
+./start_dev.sh             # serves on http://localhost:3000
+./start_dev.sh --port 4000 # extra flags pass through to jupyter-book start
 ```
 
-`start.sh` runs `jupyter-book start` from the project directory and stops its
+`start_dev.sh` runs `jupyter-book start` from the project directory and stops its
 Node server cleanly on Ctrl+C (the bare command tends to leave that server
 running, piling up idle processes). It is for editing convenience only — it does
 **not** apply the `build.sh` fixups above, so search and anchor behaviour will
-differ from production. Verify those with `./build.sh` before pushing.
+differ from production. Verify those with `./serve.sh` (below) before pushing.
+
+#### Which script to use
+
+| Script | What it does | Matches production? |
+| --- | --- | --- |
+| `./start_dev.sh` | Live dev server with auto-reload, for editing content | No — skips the `build.sh` fixups |
+| `./build.sh` | Builds the static site and applies the fixups | Produces it |
+| `./serve.sh` | Runs `build.sh`, then serves `_build/html` locally | Yes |
+
+Rule of thumb: edit with `./start_dev.sh`; check it works like the deployed site
+with `./serve.sh`.
 
 ### Hosting the book
 
