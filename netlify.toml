@@ -1,0 +1,11 @@
+[build]
+  command = ""
+  publish = "."
+
+# Preserve inbound links to the legacy Jupyter Book v1 URLs (e.g. /intro1.html)
+# by redirecting *.html to the v2 clean-URL equivalent.
+[[redirects]]
+  from = "/*.html"
+  to = "/:splat"
+  status = 301
+  force = false

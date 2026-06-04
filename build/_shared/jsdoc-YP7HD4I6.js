@@ -1,0 +1,1 @@
+import{a}from"/The-FAIR-Handbook/build/_shared/chunk-VZXSIKCR.js";import"/The-FAIR-Handbook/build/_shared/chunk-XK3K4AT7.js";import"/The-FAIR-Handbook/build/_shared/chunk-MRS6DOXX.js";import"/The-FAIR-Handbook/build/_shared/chunk-OZE3FFNP.js";export default a();

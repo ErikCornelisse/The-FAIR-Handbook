@@ -1,0 +1,241 @@
+/* User Provided Stylesheet */
+
+/* Custom overrides to bring MyST book-theme closer to the Jupyter Book v1 look.
+   Tune to taste — these are conservative starting points. */
+
+/* --- Typography --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* --- Content column width (v1 was a touch narrower than book-theme default) --- */
+main article {
+  max-width: 800px;
+}
+
+/* --- Links: v1 used underline-on-hover rather than always underlined --- */
+article a {
+  text-decoration: none;
+}
+article a:hover {
+  text-decoration: underline;
+}
+
+/* --- Header right-side icons: search (icon-only) + dark mode toggle
+   Both pinned in the header band (top: 0.625rem so they vertical-center
+   in the 60px-tall .myst-top-nav). Dark-mode icon furthest right,
+   search/magnify icon immediately to its left.
+
+   Search: clamp the button width to 2.5rem so book-theme's wider
+   sm:w-64 "search field" form collapses back to the icon-only square
+   shape (matching its default h-10 aspect-square on narrow viewports).
+   Click still opens the Radix search modal.
+
+   Dark mode: the theme button lives inside `.myst-primary-sidebar-topnav`
+   which has `lg:hidden`. Override that parent's display and hide its
+   non-theme children so only the toggle renders. The button itself is
+   position-fixed in the header band.
+
+   .myst-top-nav uses backdrop-blur which creates a containing block
+   for position:fixed descendants — kept as-is here because both fixed
+   targets sit WITHIN the 60px header band, so containing-block
+   semantics don't shift their visible position. backdrop-filter
+   override is dropped accordingly.                                    */
+
+/* Hamburger follows the theme default (`block xl:hidden`): shown below
+   the xl breakpoint (1280px), hidden at xl+ where the TOC sidebar appears
+   (its pointer is `hidden xl:flex`). So the menu button and the sidebar
+   toggle in lockstep — no override needed. */
+
+/* Logo aligned with the TOC on wide screens. At xl the hamburger is gone
+   (display:none, reserves no space) and the logo otherwise sits at the header
+   band's left padding (md:px-8 = 32px), while the TOC sidebar broke out to the
+   viewport edge (text ≈12px). Pull the logo left by 1.5rem so its image lines
+   up with the TOC text. Note: the header bar is max-w-[1440px] mx-auto, so this
+   aligns at viewports up to ~1440px; beyond that the centered header drifts the
+   logo rightward while the TOC stays pinned left. */
+@media (min-width: 1280px) {
+  .myst-home-link {
+    margin-left: -1.5rem !important;
+  }
+}
+
+/* --- Narrow-screen header tidy (Option D) ---------------------------
+   The search + theme buttons are position:fixed (out of flow), so the
+   header flexbox reserves no space for them. On narrow screens the long
+   logo_text title would otherwise slide under those buttons. Below
+   768px: hide the title text (logo image alone carries the brand; its
+   alt still holds the full title), and reserve right padding on the nav
+   bar as a guard so nothing flows under the fixed buttons.            */
+@media (max-width: 767px) {
+  .myst-home-link > span {
+    display: none !important;
+  }
+  .myst-top-nav-bar {
+    padding-right: 7rem !important; /* clears the two fixed icon buttons */
+  }
+}
+
+/* Search icon (right side of header, left of dark-mode toggle).
+   Restyled to match the dark-mode toggle's visual weight: round
+   shape, transparent background, dark border — so the header reads
+   as a row of icon buttons rather than a search field next to a
+   toggle.                                                            */
+.myst-search-bar {
+  position: fixed !important;
+  top: 0.625rem;                 /* center in 60px header: (60-40)/2 */
+  right: 4.5rem;                 /* 1.5rem inset + 2.5rem theme btn + 0.5rem gap */
+  width: 2.5rem !important;      /* override sm:w-64 to keep icon-only */
+  height: 2.5rem !important;     /* match theme btn so centerpoints align */
+  overflow: hidden !important;   /* clip any overflowing inner content */
+  z-index: 31;                   /* above the header band's z-30 */
+  border: 0 !important;          /* drop the rounded-full circular border */
+  background-color: transparent !important; /* override bg-gray-50 / dark:bg-gray-700 */
+  color: rgb(68, 64, 60) !important; /* stone-700, matches theme btn icon color */
+}
+.dark .myst-search-bar {
+  color: rgb(255, 255, 255) !important;
+}
+
+/* Hide the inner "Search" label and "/" keyboard-shortcut hint that
+   book-theme renders inside the button — without these, the button
+   shows only the magnify icon at the clamped 2.5rem width.            */
+.myst-search-text-placeholder,
+.myst-search-shortcut {
+  display: none !important;
+}
+
+/* Normalize the search SVG to match the theme SVG's sizing scheme
+   (h-full w-full p-[18%]). book-theme renders the search icon with
+   p-2.5 (10px padding) which gives a denser-looking glyph; matching
+   the theme button's 18% padding makes the two icons read as the
+   same visual size.                                                   */
+.myst-search-bar > svg {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 18% !important;
+  box-sizing: border-box !important;
+}
+
+/* Dark-mode toggle (far right of header) */
+.myst-primary-sidebar-topnav {
+  display: block !important;
+}
+.myst-primary-sidebar-topnav > *:not(.myst-theme-button) {
+  display: none !important;
+}
+.myst-theme-button {
+  position: fixed !important;
+  top: 0.625rem;                 /* (60-40)/2; equal size + equal top as search → centers align */
+  right: 1.5rem;
+  width: 2.5rem !important;      /* override w-8 (32px) → 40px to match search */
+  height: 2.5rem !important;     /* override h-8 (32px) → 40px to match search */
+  margin: 0 !important;          /* override mx-3 from book-theme */
+  z-index: 31;
+  border: 0 !important;          /* drop circular border to match search icon */
+  background-color: transparent !important;
+}
+
+/* --- Sidebar footer (version string) --------------------------------
+   The primary_sidebar_footer part (set in myst.yml) replaces the
+   default centered "Made with MyST" badge. Left-align its content.
+
+   The footer container shares the TOC container's wrapper classes
+   (ml-3 xl:ml-0 mr-3), so their left edges already align at every
+   width. The TOC text is then inset a breakpoint-independent ~0.75rem
+   (.myst-toc px-1 + item pl-2). Apply one matching inset at ALL widths
+   so the version stays aligned with the TOC entries on both small and
+   wide screens — a single constant, not a per-breakpoint value.       */
+.myst-primary-sidebar-footer {
+  text-align: left !important;
+  padding-left: 0.5rem !important;
+}
+
+/* --- Search dialog reshaped as a right-anchored side panel ---------
+   book-theme renders the search results in a Radix Dialog with class
+   .myst-search-dialog, centered on sm+ (sm:left-1/2 sm:-translate-x-1/2
+   sm:w-[90vw] sm:max-w-screen-sm). On sm+ we override that to anchor
+   the panel against the viewport's right edge with a fixed width, and
+   hide the dim backdrop. On phone-sized viewports we keep book-theme's
+   default full-screen modal behavior — a 24rem panel on a 360px screen
+   would be unusable.
+
+   Caveat: the panel is still a Radix Dialog. Clicking outside the panel
+   (e.g. on the article) still closes it; focus is trapped while open.
+   That's standard modal behavior. The CSS only changes the shape.     */
+@media (min-width: 640px) {
+  .myst-search-dialog {
+    top: 60px !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    width: 24rem !important;
+    max-width: 24rem !important;
+    height: calc(100vh - 60px) !important;
+    max-height: calc(100vh - 60px) !important;
+    border-radius: 0 !important;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Hide the dim-backdrop overlay (matched by its hex color so we don't
+     accidentally hide other fixed-inset elements). Click-outside-to-close
+     still works because Radix detects it on real DOM targets, not the
+     visual overlay.                                                     */
+  div[class*="#656c85cc"] {
+    display: none !important;
+  }
+}
+
+/* --- Sidebar TOC font size ------------------------------------------
+   Match the on-page outline (.myst-outline-section uses
+   text-sm leading-6 = 0.875rem / 1.5rem line-height). Applied on the
+   TOC container so all descendant items inherit.                       */
+.myst-primary-sidebar-toc,
+.myst-primary-sidebar-toc * {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+/* --- Sidebar content alignment ---------------------------------------
+   book-theme places the sidebar pointer at `col-margin-left`, which on
+   wide screens resolves to `grid-column: page/body-start` — that's the
+   SECOND grid line in (after `screen-start`). The content therefore sits
+   inset by the grid's left padding. Force the pointer to span from the
+   first grid line so the sidebar content starts at the viewport edge.  */
+@media (min-width: 1280px) {
+  .myst-primary-sidebar-pointer {
+    grid-column: screen-start / body-start !important;
+    justify-self: start !important;
+  }
+}
+
+/* --- Narrower sidebar (reduce visual distraction) -------------------
+   book-theme caps the sidebar content at max-w-[350px], which makes the
+   left nav a wide, dominant column. Trim it to ~14rem so it reads as a
+   slim column closer to the right Contents outline's width. The pointer
+   is left-justified (above), so the content stays anchored left and the
+   freed space becomes margin between the sidebar and the prose.
+   Trade-off: long TOC entries wrap over more lines.                    */
+.myst-primary-sidebar-toc,
+.myst-primary-sidebar-footer,
+.myst-primary-sidebar-topnav {
+  max-width: 18rem !important;   /* 288px */
+}
+
+/* --- Shift the on-page "Contents" outline rightward ------------------
+   The outline wrapper sits in col-margin-right with lg:ml-10 (2.5rem).
+   Increase that left margin so the outline moves further right within
+   its band, away from the prose. Scoped to lg+ where the outline is
+   placed in the margin. Tune the value to taste; pushing too far makes
+   the outline narrower and wraps its entries.                          */
+@media (min-width: 1024px) {
+  .lg\:col-margin-right {
+    margin-left: 6rem !important;
+  }
+}
