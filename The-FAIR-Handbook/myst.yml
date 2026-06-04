@@ -5,6 +5,7 @@ project:
   title: Playbook for Health Data Sharing Ecosystems
   authors:
     - name: TNO
+      collaboration: true
   copyright: "2026"
   github: https://github.com/dualslash/The-FAIR-Handbook
   # _toc.yml in this directory (jb-book format) is auto-discovered by MyST v2.
